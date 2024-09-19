@@ -37,13 +37,16 @@ public class Main {
 
     public static void guessingGame(Scanner scan, int target){
         int guess;
+        int attempts = 0;
         do {
             guess = getValidInput(scan);
+            attempts++;
             if (guess > target) {
                 System.out.println("It is too high");
             } else if (guess < target) {
                 System.out.println("It is too low");
             }
         } while (guess != target);
+        System.out.println("You guessed it in " + attempts + " attempts!");
     }
 }
