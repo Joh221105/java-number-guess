@@ -22,7 +22,7 @@ public class Main {
 
     public static int generateRandomNumber(){
         Random rand = new Random();
-        return rand.nextInt(101);
+        return rand.nextInt(101);  // Random number between 0 and 100
     }
 
     public static int getValidInput(Scanner scan) {
@@ -46,17 +46,25 @@ public class Main {
     }
 
     public static void guessingGame(Scanner scan, int target){
+        int lives = 10;
         int guess;
-        int attempts = 0;
-        do {
+
+        while (lives > 0) {
             guess = getValidInput(scan);
-            attempts++;
+            lives--;
+
             if (guess > target) {
-                System.out.println("It is too high");
+                System.out.println("It is too high. Lives left: " + lives);
             } else if (guess < target) {
-                System.out.println("It is too low");
+                System.out.println("It is too low. Lives left: " + lives);
+            } else {
+                System.out.println("You guessed it! The number was " + target + "!");
+                break;
             }
-        } while (guess != target);
-        System.out.println("You guessed it in " + attempts + " attempts!");
+
+            if (lives == 0) {
+                System.out.println("You've run out of lives. The number was " + target + ".");
+            }
+        }
     }
 }
