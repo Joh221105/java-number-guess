@@ -5,9 +5,19 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        playGuessingGame();
+    }
+
+    public static void playGuessingGame() {
         Scanner scan = new Scanner(System.in);
-        int target = generateRandomNumber();
-        guessingGame(scan, target);
+        String playAgain;
+        do {
+            int target = generateRandomNumber();
+            guessingGame(scan, target);
+            System.out.print("Do you want to play again? (y/n): ");
+            playAgain = scan.next();
+        } while (playAgain.equalsIgnoreCase("y"));
+        scan.close();
     }
 
     public static int generateRandomNumber(){
