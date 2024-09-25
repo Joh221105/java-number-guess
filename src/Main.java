@@ -4,6 +4,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
+    private static final int MIN_NUMBER = 0;
+    private static final int MAX_NUMBER = 100;
+    private static final int MAX_LIVES = 10;
+
     public static void main(String[] args) {
         playGuessingGame();
     }
@@ -19,20 +23,20 @@ public class Main {
 
     public static int generateRandomNumber() {
         Random rand = new Random();
-        return rand.nextInt(101);
+        return rand.nextInt(MAX_NUMBER - MIN_NUMBER + 1) + MIN_NUMBER;
     }
 
     public static int getValidInput(Scanner scan) {
         int guess = -1;
         boolean valid = false;
         while (!valid) {
-            System.out.print("Enter a number between 0 and 100: ");
+            System.out.print("Enter a number between " + MIN_NUMBER + " and " + MAX_NUMBER + ": ");
             if (scan.hasNextInt()) {
                 guess = scan.nextInt();
-                if (guess >= 0 && guess <= 100) {
+                if (guess >= MIN_NUMBER && guess <= MAX_NUMBER) {
                     valid = true;
                 } else {
-                    System.out.println("Please enter a number between 0 and 100.");
+                    System.out.println("Please enter a number between " + MIN_NUMBER + " and " + MAX_NUMBER + ".");
                 }
             } else {
                 System.out.println("Invalid input. Please enter an integer.");
@@ -43,7 +47,7 @@ public class Main {
     }
 
     public static void guessingGame(Scanner scan, int target) {
-        int lives = 10;
+        int lives = MAX_LIVES;
         int guess;
 
         while (lives > 0) {
