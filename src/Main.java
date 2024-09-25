@@ -10,19 +10,16 @@ public class Main {
 
     public static void playGuessingGame() {
         Scanner scan = new Scanner(System.in);
-        String playAgain;
         do {
             int target = generateRandomNumber();
             guessingGame(scan, target);
-            System.out.print("Do you want to play again? (y/n): ");
-            playAgain = scan.next();
-        } while (playAgain.equalsIgnoreCase("y"));
+        } while (askToPlayAgain(scan));
         scan.close();
     }
 
-    public static int generateRandomNumber(){
+    public static int generateRandomNumber() {
         Random rand = new Random();
-        return rand.nextInt(101);  // Random number between 0 and 100
+        return rand.nextInt(101);
     }
 
     public static int getValidInput(Scanner scan) {
@@ -45,7 +42,7 @@ public class Main {
         return guess;
     }
 
-    public static void guessingGame(Scanner scan, int target){
+    public static void guessingGame(Scanner scan, int target) {
         int lives = 10;
         int guess;
 
@@ -64,6 +61,20 @@ public class Main {
 
             if (lives == 0) {
                 System.out.println("You've run out of lives. The number was " + target + ".");
+            }
+        }
+    }
+
+    public static boolean askToPlayAgain(Scanner scan) {
+        System.out.print("Do you want to play again? (y/n): ");
+        while (true) {
+            String response = scan.next().trim().toLowerCase();
+            if (response.equals("y")) {
+                return true;
+            } else if (response.equals("n")) {
+                return false;
+            } else {
+                System.out.print("Invalid input. Please enter 'y' to play again or 'n' to quit: ");
             }
         }
     }
