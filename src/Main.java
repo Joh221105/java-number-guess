@@ -73,12 +73,13 @@ public class Main {
         System.out.print("Do you want to play again? (y/n): ");
         while (true) {
             String response = scan.next().trim().toLowerCase();
-            if (response.equals("y")) {
-                return true;
-            } else if (response.equals("n")) {
-                return false;
-            } else {
-                System.out.print("Invalid input. Please enter 'y' to play again or 'n' to quit: ");
+            switch (response) {
+                case "y":
+                    return true;
+                case "n":
+                    return false;
+                default:
+                    System.out.print("Invalid input. Please enter 'y' to play again or 'n' to quit: ");
             }
         }
     }
